@@ -1,0 +1,4 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Wed Apr 19 06:30:35 GMT 2023","Wed Apr 19 06:30:38 GMT 2023","2817","","portio.PortioTest","","portio.PortioTest","registrationTest_ValidCredentials_Pass","Registration with valid credentials",""
+"passed","Wed Apr 19 06:30:21 GMT 2023","Wed Apr 19 06:30:31 GMT 2023","9972","","portio.PortioTest","","portio.PortioTest","loginTest_ValidCredentials_Pass","Login with default username and password",""
+"passed","Wed Apr 19 06:30:31 GMT 2023","Wed Apr 19 06:30:35 GMT 2023","4313","","portio.PortioTest","","portio.PortioTest","loginTest_AsNewlyRegisteredUser_Pass","Login as newly registered user",""
