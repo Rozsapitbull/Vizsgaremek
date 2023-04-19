@@ -39,6 +39,7 @@ public class PortioTest {
     @Test
     @Story("Authentication")
     @Severity(SeverityLevel.BLOCKER)
+    @DisplayName("Login with default username and password")
     public void loginTest_ValidCredentials_Pass() throws InterruptedException {
         Login login = new Login(driver);
         login.navigate();
@@ -54,6 +55,7 @@ public class PortioTest {
     @Test
     @Story("Authentication")
     @Severity(SeverityLevel.BLOCKER)
+    @DisplayName("Registration with valid credentials")
     public void registrationTest_ValidCredentials_Pass() throws InterruptedException {
         Login login = new Login(driver);
         login.navigate();
@@ -70,6 +72,7 @@ public class PortioTest {
     @Test
     @Story("Authentication")
     @Severity(SeverityLevel.BLOCKER)
+    @DisplayName("Login as newly registered user")
     public void loginTest_AsNewlyRegisteredUser_Pass() throws InterruptedException {
         Login login = new Login(driver);
         login.navigate();
