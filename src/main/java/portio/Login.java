@@ -17,8 +17,8 @@ public class Login extends Pages {
     private final By INPUT_REGISTER_DESCRIPTION = By.xpath("//input[@id='register-description']");
     private final By BUTTON_LOGIN = By.xpath("//button[@onclick='myFunction()' and text()=\"Login\"]");
     private final By BUTTON_REGISTER = By.xpath("//button[@onclick='registerUser()' and text()=\"Register\"]");
-    private final By BUTTON_LOGIN_FORM = By.xpath("//button[@id='login-form-button']");
-    private final By BUTTON_REGISTER_FORM = By.xpath("//button[@id='register-form-button']");
+    private final By BUTTON_LOGIN_FORM = By.xpath("//div[@id='register']/button[@id='login-form-button' and @onclick='showLogin()']");
+    private final By BUTTON_REGISTER_FORM = By.xpath("//div[@id='login']/button[@id='register-form-button' and @onclick='showRegister()']");
     private final By BUTTON_ACCEPT_TERMSANDCONDITIONS = By.xpath("//button[@id='terms-and-conditions-button']");
     private final By FORM_LOGIN = By.xpath("//div[@id='login']");
     private final By ALERT_REGISTRATION_SUCCESS = By.xpath("//p[@id='register-alert']");
@@ -40,16 +40,14 @@ public class Login extends Pages {
     }
 
     public void login(String username, String password) {
-        acceptTermsAndConditions();
-        if (!isLogin()) {
+        if (!(isLogin())) {
             driver.findElement(BUTTON_LOGIN_FORM).click();
         }
         fillLoginForm(username, password);
         driver.findElement((BUTTON_LOGIN)).click();
     }
 
-    public void Registration(String username, String password, String email, String description) throws InterruptedException {
-        acceptTermsAndConditions();
+    public void registration(String username, String password, String email, String description) throws InterruptedException {
         if (isLogin()) {
             driver.findElement(BUTTON_REGISTER_FORM).click();
         }
@@ -65,6 +63,7 @@ public class Login extends Pages {
     public boolean isRegistrationSuccessful() {
         return driver.findElement(ALERT_REGISTRATION_SUCCESS).isDisplayed();
     }
+
 
 
 

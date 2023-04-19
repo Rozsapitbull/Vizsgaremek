@@ -1,6 +1,7 @@
 package portio;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -22,7 +23,7 @@ public class PortioTest {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--disable-notifications");
         options.addArguments("--disable-extensions");
-        //options.addArguments("--headless");
+        options.addArguments("--headless");
         options.addArguments("--window-size=1920,1080");
         options.addArguments("start-maximized");
         options.addArguments("--remote-allow-origins=*");
@@ -31,17 +32,18 @@ public class PortioTest {
 
     @BeforeEach
     public void init() {
-        //WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
     }
 
-
     @Test
-    public void loginTest_valid_pass()throws InterruptedException {
+    @Story("Authentication")
+    @Severity(SeverityLevel.BLOCKER)
+    public void loginTest_ValidCredentials_Pass() throws InterruptedException {
         Login login = new Login(driver);
         login.navigate();
         Thread.sleep(1000);
+        login.acceptTermsAndConditions();
         String username = "lovasia";
         String password = "kispal123";
         login.login(username, password);
@@ -49,18 +51,40 @@ public class PortioTest {
     }
 
 
-
     @Test
-    public void registrationTest() throws InterruptedException {
+    @Story("Authentication")
+    @Severity(SeverityLevel.BLOCKER)
+    public void registrationTest_ValidCredentials_Pass() throws InterruptedException {
         Login login = new Login(driver);
         login.navigate();
         Thread.sleep(1000);
+        login.acceptTermsAndConditions();
         String username = "Tester";
         String password = "Test123";
         String email = "test12@example.com";
         String description = "TestTestTest.";
-        login.Registration(username, password, email, description);
+        login.registration(username, password, email, description);
         Assertions.assertTrue(login.isRegistrationSuccessful());
+    }
+
+    @Test
+    @Story("Authentication")
+    @Severity(SeverityLevel.BLOCKER)
+    public void loginTest_AsNewlyRegisteredUser_Pass() throws InterruptedException {
+        Login login = new Login(driver);
+        login.navigate();
+        Thread.sleep(1000);
+        login.acceptTermsAndConditions();
+        String username = "Tester";
+        String password = "Test123";
+        String email = "test12@example.com";
+        String description = "TestTestTest.";
+        login.registration(username, password, email, description);
+        Thread.sleep(1000);
+        //login.switchToLoginForm();
+        login.login(username, password);
+        Assertions.assertEquals("https://lennertamas.github.io/portio/landing.html", driver.getCurrentUrl());
+
     }
 
     @AfterEach
