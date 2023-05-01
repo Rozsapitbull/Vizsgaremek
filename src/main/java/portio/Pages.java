@@ -3,7 +3,7 @@ package portio;
 import org.openqa.selenium.WebDriver;
 
 
-public class Pages {
+public abstract class Pages {
     WebDriver driver;
     private final String URL = "https://lennertamas.github.io/portio/";
 
