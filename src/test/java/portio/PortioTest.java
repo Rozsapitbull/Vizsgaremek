@@ -16,7 +16,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
-import java.util.Map;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class PortioTest {
@@ -77,27 +76,8 @@ public class PortioTest {
         Assertions.assertEquals("https://lennertamas.github.io/portio/landing.html", driver.getCurrentUrl());
     }
 
-
     @Test
     @Order(3)
-    @Story("Authentication")
-    @Severity(SeverityLevel.BLOCKER)
-    @DisplayName("Registration with valid credentials")
-    public void registrationTest_ValidCredentials_Pass() throws InterruptedException {
-        Login login = new Login(driver);
-        login.navigate();
-        Thread.sleep(1000);
-        login.acceptTermsAndConditions();
-        String username = "Tester";
-        String password = "Test123";
-        String email = "test12@example.com";
-        String description = "TestTestTest.";
-        login.registration(username, password, email, description);
-        Assertions.assertTrue(login.isRegistrationSuccessful());
-    }
-
-    @Test
-    @Order(4)
     @Story("Authentication")
     @Severity(SeverityLevel.BLOCKER)
     @DisplayName("Login as newly registered user")
@@ -117,7 +97,7 @@ public class PortioTest {
     }
 
     @Test
-    @Order(5)
+    @Order(4)
     @Story("Authentication")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Login multiple times")
@@ -128,6 +108,24 @@ public class PortioTest {
         login.acceptTermsAndConditions();
         login.loginMultipleTimes();
         Assertions.assertEquals("https://lennertamas.github.io/portio/", driver.getCurrentUrl());
+    }
+
+    @Test
+    @Order(5)
+    @Story("Authentication")
+    @Severity(SeverityLevel.BLOCKER)
+    @DisplayName("Registration with valid credentials")
+    public void registrationTest_ValidCredentials_Pass() throws InterruptedException {
+        Login login = new Login(driver);
+        login.navigate();
+        Thread.sleep(1000);
+        login.acceptTermsAndConditions();
+        String username = "Tester";
+        String password = "Test123";
+        String email = "test12@example.com";
+        String description = "TestTestTest.";
+        login.registration(username, password, email, description);
+        Assertions.assertTrue(login.isRegistrationSuccessful());
     }
 
     @Test
@@ -160,7 +158,7 @@ public class PortioTest {
     @Order(8)
     @Story("Images")
     @Severity(SeverityLevel.NORMAL)
-    @DisplayName("Validating logo display")
+    @DisplayName("Verification of logo display")
     public void logoTest_AsLoggedInUser_LogoIsDisplayed() throws InterruptedException {
         Landing landing = new Landing(driver);
         loginTest_ValidCredentials_Pass();
@@ -172,7 +170,7 @@ public class PortioTest {
     @Order(9)
     @Story("Images")
     @Severity(SeverityLevel.NORMAL)
-    @DisplayName("Logo is according to the expected")
+    @DisplayName("Verification of logo image")
     public void logoTest_AsLoggedInUser_LogoIsAccordingToTheExpected() throws InterruptedException, IOException {
         Landing landing = new Landing(driver);
         loginTest_ValidCredentials_Pass();
